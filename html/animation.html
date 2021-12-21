@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animation</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .e{
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="e" id="e">
+        
+    </div>
+    <script>
+  (function(){
+    let e = document.getElementById("e");
+    let left = parseFloat(getComputedStyle(e).left);
+    
+    let flag = true;  
+    function  reader(){
+        if(flag == true){
+          if(left>=500){
+              flag = false
+        }
+        e.style.left = (left++)+"px";
+       
+        }else{
+            if(left<=0){
+               flag = true;
+            }
+            e.style.left = (left--)+"px"
+        }
+    }
+ 
+    //  setInterval(reader,500)
+
+  (function animloop(){
+     reader();
+     console.log((new Date()).getTime())
+     window.requestAnimationFrame(animloop)
+  })()
+
+
+
+
+
+
+
+
+
+
+
+
+
+  }
+      
+          
+
+
+
+
+
+  )()
+
+
+
+
+
+    </script>
+</body>
+</html>
