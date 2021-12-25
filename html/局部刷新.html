@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>局部刷新</title>
+</head>
+<body>
+    <div id="box">
+        
+    </div>
+    <div id="btn">
+
+    </div>
+    <button id="tt">111</button>
+    <script>
+//    let box = document.getElementById("box");
+//    let btn = document.getElementById("btn");
+//    let tt = document.getElementById("tt");
+//    function get(url,callBack){
+//       let  xhr  = new XMLHttpRequest;
+//       xhr.open("get",url,true);
+//       xhr.onreadystatechange = function(){
+//           if(xhr.readyState == 4 && /^2\d{2}$/.test(xhr.status) ){
+//                return  callBack(JSON.parse(xhr.responseText))
+//           }
+//       } 
+//       xhr.send()
+//    }                                  
+//    function randerBox(data){
+//        box.innerHTML = `<p>${data[0].name} </p>`
+//    };
+//    function randerBtn(data){
+//        btn.innerHTML = `<p>${data[0].name} </p>`
+//    }
+//     get("../json/index1.json",randerBox)  
+//     get("../json/index2.json",randerBtn) 
+//     tt.onclick = function(){
+//         get("../json/index1.json",randerBox)
+//     }
+
+let options = {url:"",method:"post",async:"true"};
+let {url,method,async} = options;
+   console.log(url,method,async)
+
+    </script>
+</body>
+</html>

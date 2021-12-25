@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>封装Ajax</title>
+</head>
+<body>
+    <script>
+    (function(){
+        function ajax(options){
+          return new init(options)   
+        }
+        ajax.prototype = {
+            constructor:ajax,
+            version:"1.0.0",
+            handleData:function(){
+
+                let str = "";
+                let {data} = this.options;
+                // console.log(data)
+                if(data==null||typeof data == "string" ){
+                     return data
+                }else{
+                    for(let key in data){
+                        if(!data.hasOwnProperty(key)){
+                            break
+                        }
+                       str = str + `${key}=${data[key]}&` 
+                    }
+                str = str.slice(0,str.length-1) 
+                }
+              return   data = str
+            },
+            hasWenhao:function(){
+              let {url} = this.options;
+              return url.includes("?")?"&":"?";
+            },
+            send:function(){
+               let {method,url,async,data,cache} = this.options;
+               let xhr = new XMLHttpRequest;
+               //1.首先看一下当前的data是对象还是字符串，如果是字符串就不用管，是对象的话就要转为字符串，封装一个方法
+               data = this.handleData()
+               console.log(data)
+               //2.查看一下当前是否是get请求，如果是看看后面data有没有值，有值的话直接拼接在url后面
+               let reg = /^(data|delete|header|options)$/i;
+               if(data && reg.test(method)){
+                   url +=`${this.hasWenhao()}${data}`;
+
+                   data = null;
+                   //如果是get请求，在data使用完成之后，就把他赋值为null，这样就不会传给send里了
+               };
+               //3.如果是get请求，并且cache的值是false，说明不走缓存（在后面加一个随机值或者时间戳）
+             
+               if(reg.test(method)&& !cache){
+                  let num = Math.random();
+                  console.log(num)
+                  url+=`${this.hasWenhao()}_=${num}`
+               };
+               console.log(url)
+               xhr.open(method,url,async);
+               xhr.onreadystatechange = function(){
+
+               }
+               xhr.send(data);
+            }
+        }
+        //默认的参数配置
+        let defaults = {
+            url:"",
+            method:"GET",
+            data:null,
+            dataType:"JSON",
+            async:true,
+            cache:true,
+            timeOut:null,
+            headers:null,
+            success:null,
+            error:null
+        }
+        function init(options){
+            //1.要把用户传的参数和默认的参数结合在一起，如果出现一样的那么后面的则覆盖前面的
+            this.options = {...defaults,...options};
+            console.log(this.options)
+            //2.发送ajax请求
+            this.send()
+        }
+        init.prototype = ajax.prototype;
+        window.ajax = ajax
+    })()
+     ajax({
+         url:"../json/index1.json",
+         method:"get",
+         async:false,
+         cache:false,
+         data:{name:1,age:22}
+     })
+   
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
