@@ -44,10 +44,10 @@
                data = this.handleData()
                console.log(data)
                //2.查看一下当前是否是get请求，如果是看看后面data有没有值，有值的话直接拼接在url后面
-               let reg = /^(data|delete|header|options)$/i;
+               let reg = /^(get|delete|header|options)$/i;
                if(data && reg.test(method)){
                    url +=`${this.hasWenhao()}${data}`;
-
+                   this.options.url = url;  
                    data = null;
                    //如果是get请求，在data使用完成之后，就把他赋值为null，这样就不会传给send里了
                };
@@ -63,7 +63,7 @@
                xhr.onreadystatechange = function(){
 
                }
-               xhr.send(data);
+            //    xhr.send(data);
             }
         }
         //默认的参数配置
