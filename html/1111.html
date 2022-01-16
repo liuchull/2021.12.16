@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11111</title>
+</head>
+<body>
+    <script>
+     let res = "abcacbcsadb";
+     function find(){
+      let obj = {};
+      let ary = [];
+      for(let i = 0;i<res.length;i++){
+         let item = res[i];
+         if(!obj[item]){
+           obj[item] = 1; 
+         }else{
+             obj[item]++
+         }
+      };
+    
+      for(let key in obj){
+        let p = {};
+        p[key] = obj[key];
+        ary.push(p)
+      } 
+      return ary
+     };
+     let result = find(res);
+     console.log(result)
+
+    let ww = {a: 3, b: 3, c: 3, s: 1, d: 1};
+    let ss = Array.from(ww);
+    console.log(ss)
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
